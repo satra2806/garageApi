@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using garageApi.Services;
+using Microsoft.AspNetCore.Cors;
 
 namespace garageApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowOrigin")]
     public class GarageController : ControllerBase
     {
         private readonly IGarageService _garageService;

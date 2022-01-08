@@ -28,6 +28,14 @@ namespace garageApi
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            });
+            //services.AddCors(c =>
+            //{
+            //    c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://garageapps.herokuapp.com/"));
+            //});
             services.AddControllers();
             services.Configure<GarageDatabaseSettings>(Configuration.GetSection("GarageDatabase"));
             services.AddScoped<IGarageService, GarageService>();
@@ -46,6 +54,7 @@ namespace garageApi
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors(options => options.AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {
